@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Digit Software Solutions.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ *
+ * @category  Dss
+ * @package   Dss_DisableRegistration
+ * @author    Extension Team
+ * @copyright Copyright (c) 2024 Digit Software Solutions. ( https://digitsoftsol.com )
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="dss_disableregistration" sortOrder="100" translate="label"
+            showInDefault="1" showInWebsite="1" showInStore="1">
+            <tab>dss</tab>
+            <label>Disable Registration</label>
+            <resource>Dss_DisableRegistration::config</resource>
+            <group id="general" translate="label" sortOrder="10"
+                showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10"
+                    showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="debug" translate="label" type="select" sortOrder="20"
+                    showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Debug Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="registration" translate="label" sortOrder="20"
+                showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Registration Settings</label>
+                <field id="registration_option" translate="label" type="select" sortOrder="20"
+                    showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Option</label>
+                    <source_model>Dss\DisableRegistration\Model\System\Config\Source\RegistrationOption</source_model>
+                    <tooltip>
+                        <![CDATA[<strong>Enabled:</strong> Customer can register.<br />
+                        <strong>Disabled:</strong> Customer won't be able to register.]]>
+                    </tooltip>
+                </field>
+                <field id="enable_disabled_message" translate="label" type="select" sortOrder="25"
+                    showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Disabled Message</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="registration_option">0</field>
+                    </depends>
+                </field>
+                <field id="disabled_message" translate="label" type="textarea" sortOrder="30"
+                    showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disabled Message</label>
+                    <tooltip>
+                        <![CDATA[The specified message will be shown if registration option is disabled.]]>
+                    </tooltip>
+                    <depends>
+                        <field id="enable_disabled_message">1</field>
+                        <field id="registration_option">0</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="restriction" translate="label" sortOrder="20"
+                showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Advanced Restrictions</label>
+                <field id="restriction_settings_info" translate="label" sortOrder="10"
+                    showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[&nbsp;]]></label>
+                    <frontend_model>Dss\DisableRegistration\Block\Adminhtml\System\RestrictionSetting</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
